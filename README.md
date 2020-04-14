@@ -12,7 +12,7 @@ const Jaorm = require('jaorm');
 // Standard Knex.js configuration block
 const database_config = {
   client: "pg",
-  connection:: {
+  connection: {
       host: "127.0.0.1",
       user: "jaorm",
       password: "jaorm",

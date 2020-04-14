@@ -1,11 +1,15 @@
 {
   "name": "jaorm",
   "description": "Just Another ORM",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "lib/schema.js",
   "author": {
     "name": "Andrew Nelson",
     "email": "andrew.nelson@iinteractive.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iinteractive/jaorm.git"
   },
   "dependencies": {
     "knex": "^0.19.4",
