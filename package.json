@@ -1,7 +1,7 @@
 {
   "name": "jaorm",
   "description": "Just Another ORM",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "main": "lib/schema.js",
   "author": {
     "name": "Andrew Nelson",
@@ -30,7 +30,6 @@
     "mocha": "6.1.2",
     "mysql": "^2.17.1",
     "mysql2": "^2.1.0",
-    "nyc": "13.3.0",
     "pg": "7.12.1",
     "prettier": "1.16.4",
     "sqlite3": "4.1.0"
@@ -40,23 +39,7 @@
     "npm": "6.11.3"
   },
   "scripts": {
-    "tests": "node run_tests.js",
-    "coverage": "nyc npm run tests"
-  },
-  "nyc": {
-    "check-coverage": true,
-    "exclude": [
-      "run_tests.js",
-      "test/**"
-    ],
-    "lines": 99,
-    "statements": 99,
-    "functions": 99,
-    "branches": 99,
-    "reporter": [
-      "text",
-      "text-summary"
-    ]
+    "tests": "node run_tests.js"
   },
   "husky": {
     "hooks": {
