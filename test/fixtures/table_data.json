@@ -1,0 +1,153 @@
+{
+  "table_order": ["user", "role", "user_prefs", "user_role", "message", "meta"],
+  "table_data": {
+    "user": [
+      {
+        "id": 1,
+        "username": "fred",
+        "password": "1234"
+      },
+      {
+        "id": 2,
+        "username": "annie",
+        "password": "12345"
+      },
+      {
+        "id": 3,
+        "username": "robert",
+        "password": "1234423"
+      },
+      {
+        "id": 4,
+        "username": "tara",
+        "password": "jf24r23c!"
+      },
+      {
+        "id": 5,
+        "username": "jimmy",
+        "password": "a"
+      },
+      {
+        "id": 6,
+        "username": "billy",
+        "password": "a"
+      }
+    ],
+    "user_prefs": [
+      {
+        "user_id": 1,
+        "theme": "dark",
+        "font": "comic sans"
+      },
+      {
+        "user_id": 2,
+        "theme": "light",
+        "font": "courier"
+      },
+      {
+        "user_id": 3,
+        "theme": "dark",
+        "font": "courier new"
+      },
+      {
+        "user_id": 4,
+        "theme": "dark",
+        "font": "comic sans"
+      },
+      {
+        "user_id": 5,
+        "theme": "dark",
+        "font": "comic sans"
+      },
+      {
+        "user_id": 6,
+        "theme": "light",
+        "font": "wingdings"
+      }
+    ],
+    "role": [
+      { "id": 1, "name": "Admin" },
+      { "id": 2, "name": "Moderator" },
+      { "id": 3, "name": "Premium User" },
+      { "id": 4, "name": "Free User" }
+    ],
+    "user_role": [
+      { "user_id": 1, "role_id": 4 },
+      { "user_id": 2, "role_id": 2 },
+      { "user_id": 3, "role_id": 1 },
+      { "user_id": 4, "role_id": 3 },
+      { "user_id": 5, "role_id": 4 }
+    ],
+    "meta": [
+      {
+        "key": "disable_widgets",
+        "value": "yes"
+      },
+      {
+        "key": "disable_ads",
+        "value": "no"
+      },
+      {
+        "key": "default_font",
+        "value": "wingdings"
+      }
+    ],
+    "friend_list": [
+      {
+        "user_id": 1,
+        "friend_id": 4
+      }
+    ],
+    "message": [
+      {
+        "uuid": "223f2183-1e44-4db6-8241-fa147253d068",
+        "sender_id": 1,
+        "recipient_id": 4,
+        "read": true,
+        "message": "I hate the new layout, I can not find anything!"
+      },
+      {
+        "uuid": "a0dd55a2-b25d-4b3b-83fe-903bcfe39e5f",
+        "sender_id": 4,
+        "recipient_id": 3,
+        "read": true,
+        "message": "The change password screen is not working for me. Can you help?"
+      },
+      {
+        "uuid": "505a7b6f-ad5e-493d-a695-268887259ace",
+        "sender_id": 5,
+        "recipient_id": 1,
+        "read": false,
+        "message": "Stop reporting me to the moderators!"
+      },
+      {
+        "uuid": "7c6e8fe5-aa9c-45fc-acc4-52e1fe4320dc",
+        "sender_id": 5,
+        "recipient_id": 1,
+        "read": false,
+        "message": "I KEEP GETTING WARNED BY THE MODERATORS. I KNOW YOU ARE THE ONE REPORTING ME. STOP IT!"
+      },
+      {
+        "uuid": "144bd7b3-966e-40b4-a473-5e27fce72c81",
+        "sender_id": 5,
+        "recipient_id": 3,
+        "read": false,
+        "message": "Your moderators are biased against me! Please fire them!"
+      },
+      {
+        "uuid": "6a5c2306-098a-4f6a-ab7e-b7c10c6a9447",
+        "sender_id": 1,
+        "recipient_id": 5,
+        "read": true,
+        "message": "I don't know what you're talking about. Leave me alone or I really will report you!"
+      },
+      {
+        "uuid": "0077f067-60bb-469c-a912-522802afa073",
+        "sender_id": 2,
+        "recipient_id": 5,
+        "read": false,
+        "message": "I am not going to warn you again. Stop flaming other users or you will be banned."
+      }
+    ]
+  }
+}
