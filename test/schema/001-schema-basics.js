@@ -61,7 +61,7 @@ describe("Test the baseline schema object by making sure that", function test_sc
     } catch (err) {
       assert.strictEqual(
         err.toString(),
-        "Error: No ResultSet for that table name",
+        'Error: No ResultSet for table "garbage"',
         "Got the correct error message"
       );
     }

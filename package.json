@@ -1,7 +1,7 @@
 {
   "name": "jaorm",
   "description": "Just Another ORM",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "main": "lib/schema.js",
   "author": {
     "name": "Andrew Nelson",
