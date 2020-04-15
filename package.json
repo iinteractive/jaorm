@@ -35,8 +35,8 @@
     "sqlite3": "4.1.0"
   },
   "engines": {
-    "node": "12.11.1",
-    "npm": "6.11.3"
+    "node": ">= 12.11.1",
+    "npm": ">= 6.11.3"
   },
   "scripts": {
     "tests": "node run_tests.js"
