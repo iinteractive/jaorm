@@ -46,6 +46,22 @@ const check_for_root_user =
 ```
 
 ```javascript
+// Getting the first result from a query
+const user =
+  await jaorm.rs('users')
+  .where({ username: 'bob' })
+  .first();
+```
+
+```javascript
+// Running a query where you expect exactly one result
+const user =
+  await jaorm.rs('users')
+  .where({ username: 'bob' })
+  .only_one(); // throws an exception if the result count is not exactly 1
+```
+
+```javascript
 // Reusing resultsets at multiple points in the chain
 const unread_messages =
   await jaorm.rs('messages')

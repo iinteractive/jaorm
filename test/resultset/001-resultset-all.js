@@ -178,4 +178,36 @@ describe("Test result sets by making sure that we", function test_resultset_basi
       "Retrieved everything that we put in without incident"
     );
   });
+
+  it("get exactly one result from only_one(), and throws otherwise", async () => {
+    const fred = await schema
+      .rs("user")
+      .where({ username: "fred" })
+      .only_one();
+    assert.strictEqual(fred.username(), "fred", "Got Fred!");
+
+    try {
+      await schema
+        .rs("user")
+        .where({ password: "a" })
+        .only_one();
+    } catch (err) {
+      assert.strictEqual(
+        err.toString(),
+        "Error: A call to only_one() for user yielded multiple results."
+      );
+    }
+
+    try {
+      await schema
+        .rs("user")
+        .where({ password: "no_such_password" })
+        .only_one();
+    } catch (err) {
+      assert.strictEqual(
+        err.toString(),
+        "Error: A call to only_one() for user yielded no result."
+      );
+    }
+  });
 });
