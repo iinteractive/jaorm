@@ -13,8 +13,8 @@ describe("Test the baseline schema object by making sure that", function test_sc
     const pks = schema.list_pks();
     assert.strictEqual(
       Object.keys(pks).length,
-      5,
-      "Four tables have primary keys"
+      6,
+      "Six tables have primary keys"
     );
 
     assert.strictEqual(pks.user[0], "id", "Got the PK for the user table");
@@ -47,6 +47,13 @@ describe("Test the baseline schema object by making sure that", function test_sc
       pks.message.length,
       1,
       "Got the right number of PKs for the message table"
+    );
+
+    assert.strictEqual(pks.news[0], "id", "Got the PK for the news table");
+    assert.strictEqual(
+      pks.message.length,
+      1,
+      "Got the right number of PKs for the news table"
     );
 
     assert.notStrictEqual(

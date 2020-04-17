@@ -1,5 +1,13 @@
 {
-  "table_order": ["user", "role", "user_prefs", "user_role", "message", "meta"],
+  "table_order": [
+    "user",
+    "role",
+    "user_prefs",
+    "user_role",
+    "message",
+    "meta",
+    "news"
+  ],
   "table_data": {
     "user": [
       {
@@ -96,6 +104,19 @@
       {
         "user_id": 1,
         "friend_id": 4
+      }
+    ],
+    "news": [
+      {
+        "id": 1,
+        "headline": "Welcome to our forum!",
+        "tags": "welcome,new_users",
+        "story_text": "Welcome! Please be courteous to others while you are here."
+      },
+      {
+        "id": 2,
+        "headline": "A reminder to be civil to others",
+        "story_text": "Lately we've had some users harassing others. If this happens, you will be banned."
       }
     ],
     "message": [

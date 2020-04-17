@@ -167,4 +167,15 @@ describe("Test result sets by making sure that we", function test_resultset_basi
       "Got the correct result"
     );
   });
+
+  it("grab results where at least one of the entries will have a null to inflate", async () => {
+    const news_rs = schema.rs("news");
+    const news_posts = await news_rs.all();
+
+    assert.strictEqual(
+      news_posts.length,
+      fixtures.table_data.news.length,
+      "Retrieved everything that we put in without incident"
+    );
+  });
 });
