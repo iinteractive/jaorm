@@ -61,13 +61,6 @@ const pg_test_db_configuration = {
 let db_type = "sqlite";
 
 async function run_tests(options) {
-  Object.defineProperty(Mocha.Suite.prototype, "db_type", {
-    get() {
-      return db_type;
-    },
-    set() {}
-  });
-
   Object.defineProperty(Mocha.Suite.prototype, "assert", {
     get() {
       return chai.assert;
@@ -85,9 +78,11 @@ async function run_tests(options) {
   Object.defineProperty(Mocha.Suite.prototype, "schema_options", {
     get() {
       return {
+        cache_results: true,
         logging_level: "error",
         result_dir: "test/lib/result",
-        resultset_dir: "test/lib/resultset"
+        resultset_dir: "test/lib/resultset",
+        serialize_objects: true
       };
     },
     set() {}
@@ -109,7 +104,7 @@ async function run_tests(options) {
     set() {}
   });
 
-  const databases_to_test = ["sqlite", "mysql", "mysql2", "pg"];
+  const databases_to_test = ["sqlite", "mysql", "mysql2", "pg", "dummy"];
 
   // We need a separate mocha instance for each round of this, because it
   // doesn't clear listeners properly.
@@ -123,15 +118,14 @@ async function run_tests(options) {
     mochas[db_type] = new Mocha({ reporter: "spec", timeout: test_timeout });
 
     const files = [];
-    let test_sections = ["test/schema", "test/resultset", "test/result"];
-    if (options.files && options.files.length > 0) {
-      test_sections = options.files;
-    }
+    let test_sections = [
+      "test/schema",
+      "test/resultset",
+      "test/result",
+      "test/drivers"
+    ];
     for (const ts of test_sections) {
       let section_files = Mocha.utils.lookupFiles(ts, ["js"], true);
-      if (Array.isArray(section_files) === false) {
-        section_files = [section_files];
-      }
       Array.prototype.push.apply(files, section_files);
     }
 
@@ -219,6 +213,8 @@ async function _setup_tests(database_type) {
       return await _setup_mysql2();
     case "pg":
       return await _setup_pg();
+    case "dummy":
+      return false;
     default:
       // Not real sure how we'd get here, but just in case
       throw new Error("Got an invalid db_type to test!");

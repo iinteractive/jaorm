@@ -72,4 +72,13 @@ describe("Test the baseline schema object by making sure that", function test_sc
       "Got the right number of PKs for the friend_list table"
     );
   });
+
+  it("we get 'id' for a pk from a table that has it but no properly defined PK", async () => {
+    const warning = await schema.rs("user_reports").first();
+    assert.strictEqual(
+      warning.pks()[0],
+      "id",
+      "We got id as the PK from a table without a properly defined one"
+    );
+  });
 });

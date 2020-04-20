@@ -45,4 +45,21 @@ describe("Test result objects' ability to update by making sure that we", functi
       "Everything is back to how it was"
     );
   });
+
+  it("fail when trying to update a row that doesn't have a primary key", async () => {
+    const user_pref = await schema
+      .rs("user_prefs")
+      .where({ font: "comic sans" })
+      .first();
+    try {
+      await user_pref.font("helvetica");
+      throw new Error("We updated a row in place that doesn't have a PK!");
+    } catch (err) {
+      assert.strictEqual(
+        err.toString(),
+        "Error: You can't use a single object update() without a primary key on the table. Please use rs.update_all().",
+        "got the proper error message"
+      );
+    }
+  });
 });

@@ -36,4 +36,21 @@ describe("Test the resultset destroy_all() functionality by making sure that we"
       "We ended with the same number we started with"
     );
   });
+
+  it("fail when trying to delete a row that doesn't have a primary key", async () => {
+    const user_pref = await schema
+      .rs("user_prefs")
+      .where({ font: "comic sans" })
+      .first();
+    try {
+      await user_pref.destroy();
+      throw new Error("We destroyed a row in place that doesn't have a PK!");
+    } catch (err) {
+      assert.strictEqual(
+        err.toString(),
+        "Error: You can't use a single object destroy() without a primary key on the table. Please use rs.destroy_all().",
+        "got the proper error message"
+      );
+    }
+  });
 });

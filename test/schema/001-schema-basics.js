@@ -15,6 +15,34 @@ describe("Test the baseline schema object by making sure that", function test_sc
     assert.strictEqual(default_schema.resultset_dir, "lib/jaorm/resultset");
   });
 
+  it("we fail to create a schema with an invalid log level setting", () => {
+    try {
+      const bad_schema = new Schema(test_db_config, { logging_level: "plaid" });
+      throw new Error("The schema instantiated even with an invalid log level");
+    } catch (err) {
+      assert.strictEqual(
+        err.toString(),
+        'Error: Log level "plaid" is invalid.',
+        "Got the correct error for invalid log level"
+      );
+    }
+  });
+
+  it("we fail to create a schema with an invalid driver", () => {
+    try {
+      const bad_schema = new Schema(test_db_config, {
+        driver_type: "hibernate"
+      });
+      throw new Error("The schema instantiated even with an invalid driver");
+    } catch (err) {
+      assert.strictEqual(
+        err.toString(),
+        "Error: Failed to load driver of type hibernate: Error: Cannot find module './drivers/hibernate.js'",
+        "Got the correct error for invalid driver"
+      );
+    }
+  });
+
   it("we get the correct number of tables", async () => {
     const table_list = await schema.list_tables();
     assert.strictEqual(
@@ -94,5 +122,12 @@ describe("Test the baseline schema object by making sure that", function test_sc
       'This is a custom method on the ResultSet for "message"',
       "Got the custom method's text"
     );
+  });
+
+  it("we get a proper response from a raw call", async () => {
+    // The format of the results changes wildly based on the specific driver,
+    // so as long as this doesn't explode we're okay. Check the results manually
+    // if/when you need to make sure that this is working.
+    await schema.raw("SELECT 1");
   });
 });

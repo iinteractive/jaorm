@@ -62,6 +62,22 @@ const user =
 ```
 
 ```javascript
+// Running a query where you expect either exactly one result, or nothing
+const user =
+  await jaorm.rs('users')
+  .where({ username: 'bob' })
+  .one(); // throws an exception if the result count is > 1; null if no results
+```
+
+```javascript
+// Running a query where you expect exactly zero results
+const user =
+  await jaorm.rs('users')
+  .where({ username: 'mr_bigglesworth' })
+  .none(); // throws an exception if the result count is > 0, null if 0
+```
+
+```javascript
 // Reusing resultsets at multiple points in the chain
 const unread_messages =
   await jaorm.rs('messages')

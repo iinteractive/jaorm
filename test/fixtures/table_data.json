@@ -6,7 +6,9 @@
     "user_role",
     "message",
     "meta",
-    "news"
+    "friend_list",
+    "news",
+    "user_reports"
   ],
   "table_data": {
     "user": [
@@ -72,6 +74,9 @@
         "theme": "light",
         "font": "wingdings"
       }
+    ],
+    "user_reports": [
+      { "id": 1, "reporting_user_id": 1, "reported_user_id": 5 }
     ],
     "role": [
       { "id": 1, "name": "Admin" },

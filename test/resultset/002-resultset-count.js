@@ -22,7 +22,7 @@ describe("Test the resultset count() functionality by making sure that we", func
   it("get a single result when we're specific about a query", async () => {
     const username = "fred";
 
-    const user_rs = schema.rs("user").search_parameters({ username });
+    const user_rs = schema.rs("user").where({ username });
     const count = await user_rs.count();
     assert.strictEqual(count, 1, "Just got the one result");
   });
@@ -31,7 +31,7 @@ describe("Test the resultset count() functionality by making sure that we", func
     const password = "a";
 
     const user_rs = schema.rs("user");
-    user_rs.search_parameters({ password });
+    user_rs.where({ password });
     const count = await user_rs.count();
     assert.strictEqual(count, 2, "Got two results");
   });
@@ -40,7 +40,7 @@ describe("Test the resultset count() functionality by making sure that we", func
     const username = "annie";
     const password = "123";
 
-    const user_rs = schema.rs("user").search_parameters({ username, password });
+    const user_rs = schema.rs("user").where({ username, password });
     const count = await user_rs.count();
     assert.strictEqual(count, 0, "Got no results");
   });

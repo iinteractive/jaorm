@@ -55,7 +55,7 @@ describe("Test the schema object's transaction functionality by making sure that
     );
   });
 
-  it("a transaction rolls back properly", async () => {
+  it("a transaction rolls back a creation properly", async () => {
     const role_rs = schema.rs("role");
     const role_count = await role_rs.count();
 
@@ -73,6 +73,44 @@ describe("Test the schema object's transaction functionality by making sure that
       role_count,
       new_role_count,
       "The new role got rolled back"
+    );
+  });
+
+  it("a transaction rolls back an update properly", async () => {
+    const role_rs = schema.rs("role");
+    const role_count = await role_rs.where({ name: "Free User" }).count();
+
+    await schema.transaction(async trx => {
+      await role_rs
+        .where({ name: "Free User" })
+        .update_all({ name: "Ultimate Administrator" }, { transaction: trx });
+      throw new Error("That's a ridiculous name. Have some dignity, people.");
+    });
+
+    role_rs.clear();
+    const new_role_count = await role_rs.where({ name: "Free User" }).count();
+    assert.strictEqual(
+      role_count,
+      new_role_count,
+      "The new role got rolled back"
+    );
+  });
+
+  it("a transaction rolls back a destroy properly", async () => {
+    const role_rs = schema.rs("role");
+    const role_count = await role_rs.where({ name: "Free User" }).count();
+
+    await schema.transaction(async trx => {
+      await role_rs.destroy_all({ name: "Free User" }, { transaction: trx });
+      throw new Error("Don't get rid of the free tier!");
+    });
+
+    role_rs.clear();
+    const new_role_count = await role_rs.where({ name: "Free User" }).count();
+    assert.strictEqual(
+      role_count,
+      new_role_count,
+      "The free tier got put back"
     );
   });
 });
