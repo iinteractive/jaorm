@@ -193,6 +193,4 @@ await bob.destroy(); // "delete" is a reserved word, so we use destroy
 await jaorm.rs('user').where({ status: 'banned' }).destroy_all();
 ```
 
-````
 &copy; 2020 Infinity Interactive
-````

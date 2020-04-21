@@ -12,7 +12,7 @@ describe("Test resultset relations by making sure that we", function test_result
   it("get a blank relations list if we pass in nothing", () => {
     const user_rs = schema.rs("user").with();
     assert.deepEqual(
-      user_rs._relations,
+      user_rs.relations(),
       {},
       "Got a blank set of relations when passing in undef"
     );
@@ -21,7 +21,7 @@ describe("Test resultset relations by making sure that we", function test_result
   it("get a blank relations list if we pass in null", () => {
     const user_rs = schema.rs("user").with(null);
     assert.deepEqual(
-      user_rs._relations,
+      user_rs.relations(),
       {},
       "Got a blank set of relations when passing in undef"
     );
@@ -30,7 +30,7 @@ describe("Test resultset relations by making sure that we", function test_result
   it("get a blank relations list if we pass in an empty array", () => {
     const user_rs = schema.rs("user").with([]);
     assert.deepEqual(
-      user_rs._relations,
+      user_rs.relations(),
       {},
       "Got a blank set of relations when passing in an empty array"
     );
