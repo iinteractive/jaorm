@@ -109,6 +109,50 @@ const inactive_users =
 const active_users = await active_user_rs.all();
 ```
 
+### Slightly more complex queries
+
+```javascript
+// Use SQL LIKE
+const users = await jaorm.rs("user")
+  .where({ password: { like: "1234%" } }).all();
+```
+
+```javascript
+// greater than
+const users = await jaorm.rs("user").where({ id: { ">" : 4 } }).all();
+```
+
+```javascript
+// greater than or equal to
+const users = await jaorm.rs("user").where({ id: { ">=": 3 } }).all();
+```
+
+```javascript
+// less than
+const users = await jaorm.rs("user").where({ id: { "<": 2 } }).all();
+```
+
+```javascript
+// less than or equal to
+const users = await jaorm.rs("user").where({ id: { "<=": 4 } }).all();
+```
+
+```javascript
+// is not equal
+const users = await jaorm.rs("user").where({ id: { "!=": 3 } }).all();
+```
+
+```javascript
+// in
+const users = await jaorm.rs("user").where({ id: { in: [ 3, 5, 13 ] } }).all();
+```
+
+```javascript
+// not in
+const users = await jaorm.rs("user")
+  .where({ password: { "not in": [ 1, 43 ]} }).all();
+```
+
 ### Using relations
 
 ```javascript
@@ -191,6 +235,20 @@ await bob.destroy(); // "delete" is a reserved word, so we use destroy
 ```javascript
 // Remove a lot of rows
 await jaorm.rs('user').where({ status: 'banned' }).destroy_all();
+```
+
+### Raw SQL
+```javascript
+// Note: this won't give you proper Result objects, but sometimes worth it
+const res = await jaorm.raw("SELECT * FROM users");
+```
+
+```javascript
+// This WILL give you proper result objects, but is limited to the WHERE clause
+// The key of the hash is ignored.
+const first_user = await jaorm.rs("user")
+  .where({ _: { raw: "id = 1" }})
+  .first();
 ```
 
 &copy; 2020 Infinity Interactive

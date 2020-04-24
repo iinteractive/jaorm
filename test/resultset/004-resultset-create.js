@@ -14,7 +14,7 @@ describe("Test the resultset create() functionality by making sure that we", fun
     const user_count = await user_rs.count();
     const new_user = await user_rs.create({
       username: "alberto",
-      password: "12345678"
+      password: "987654321"
     });
 
     assert.strictEqual(
@@ -29,7 +29,7 @@ describe("Test the resultset create() functionality by making sure that we", fun
     );
     assert.strictEqual(
       new_user.password(),
-      "12345678",
+      "987654321",
       "Got the new user we expected, with the awful password they submitted"
     );
     assert.isDefined(

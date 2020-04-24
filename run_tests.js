@@ -81,8 +81,7 @@ async function run_tests(options) {
         cache_results: true,
         logging_level: "error",
         result_dir: "test/lib/result",
-        resultset_dir: "test/lib/resultset",
-        serialize_objects: true
+        resultset_dir: "test/lib/resultset"
       };
     },
     set() {}
