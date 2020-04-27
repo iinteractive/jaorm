@@ -66,8 +66,7 @@ describe("Test result sets by making sure that we", function test_resultset_basi
   it("get a single result when we set the parameters before the query", async () => {
     const username = "robert";
 
-    const user_rs = schema.rs("user");
-    user_rs.where({ username });
+    const user_rs = schema.rs("user").where({ username });
     const users = await user_rs.all();
     assert.strictEqual(users.length, 1, "Just got the one result");
     const user = users[0];

@@ -28,16 +28,16 @@ describe("Test the baseline schema object by making sure that", function test_sc
     }
   });
 
-  it.skip("we fail to create a schema with an invalid driver", () => {
+  it("we fail to create a schema with an invalid driver", () => {
     try {
       const bad_schema = new Schema(test_db_config, {
         driver_type: "hibernate"
       });
       throw new Error("The schema instantiated even with an invalid driver");
     } catch (err) {
-      assert.strictEqual(
+      assert.match(
         err.toString(),
-        "Error: Failed to load driver of type hibernate: Error: Cannot find module './drivers/hibernate.js'",
+        /^Error: Failed to load driver of type hibernate: Error: Cannot find module '.\/drivers\/hibernate.js'/,
         "Got the correct error for invalid driver"
       );
     }

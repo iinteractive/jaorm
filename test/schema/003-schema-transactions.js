@@ -13,8 +13,8 @@ describe("Test the schema object's transaction functionality by making sure that
     let numero = 1;
     const user_rs = schema.rs("user");
 
-    await schema.transaction(async trx => {
-      numero = await user_rs.count(trx);
+    await schema.transaction(async transaction => {
+      numero = await user_rs.count(undefined, { transaction });
       return true;
     });
 
@@ -29,10 +29,10 @@ describe("Test the schema object's transaction functionality by making sure that
     let numero = 1;
     const user_rs = schema.rs("user");
 
-    await schema.transaction(async trx => {
+    await schema.transaction(async transaction => {
       throw new Error("Did I leave the stove on?");
       // eslint-disable-next-line no-unreachable
-      numero = await user_rs.count(trx);
+      numero = await user_rs.count(undefined, { transaction });
     });
 
     assert.strictEqual(
@@ -46,7 +46,9 @@ describe("Test the schema object's transaction functionality by making sure that
     let numero = 1;
     const user_rs = schema.rs("user");
 
-    numero = await schema.transaction(async trx => await user_rs.count(trx));
+    numero = await schema.transaction(
+      async transaction => await user_rs.count(undefined, { transaction })
+    );
 
     assert.strictEqual(
       numero,

@@ -30,8 +30,7 @@ describe("Test the resultset count() functionality by making sure that we", func
   it("get the proper count we set the parameters before the query", async () => {
     const password = "a";
 
-    const user_rs = schema.rs("user");
-    user_rs.where({ password });
+    const user_rs = schema.rs("user").where({ password });
     const count = await user_rs.count();
     assert.strictEqual(count, 2, "Got two results");
   });

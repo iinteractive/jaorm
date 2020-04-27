@@ -14,8 +14,10 @@ describe("Test the extended where() on resultsets by making sure that we", funct
   });
 
   it("get a single result when we give a specific LIKE", async () => {
-    const user_rs = schema.rs("user");
-    const users = await user_rs.where({ username: { like: "fre%" } }).all();
+    const users = await schema
+      .rs("user")
+      .where({ username: { like: "fre%" } })
+      .all();
     assert.strictEqual(users.length, 1, "Just got the one result");
     const user = users[0];
     assert.strictEqual(
@@ -26,8 +28,7 @@ describe("Test the extended where() on resultsets by making sure that we", funct
   });
 
   it("get a the correct number of results from a specific LIKE", async () => {
-    const user_rs = schema.rs("user");
-    user_rs.where({ password: { like: "123%" } });
+    const user_rs = schema.rs("user").where({ password: { like: "123%" } });
     const users = await user_rs.all();
     assert.strictEqual(users.length, 3, "Got three results");
   });
@@ -46,23 +47,18 @@ describe("Test the extended where() on resultsets by making sure that we", funct
   });
 
   it("get a the correct number of results from a less than", async () => {
-    const user_rs = schema.rs("user");
-    user_rs.where({ id: { "<": 5 } });
+    const user_rs = schema.rs("user").where({ id: { "<": 5 } });
     const users = await user_rs.all();
     assert.strictEqual(users.length, 4, "Got four results");
   });
 
   it("get a the correct number of results from a less than or equal to", async () => {
-    const user_rs = schema.rs("user");
-    user_rs.where({ id: { "<=": 5 } });
-    const users = await user_rs.all();
+    const users = await schema.rs("user").all({ id: { "<=": 5 } });
     assert.strictEqual(users.length, 5, "Got four results");
   });
 
   it("get a the correct number of results from a greater than", async () => {
-    const user_rs = schema.rs("user");
-    user_rs.where({ id: { ">": 5 } });
-    const users = await user_rs.all();
+    const users = await schema.rs("user").all({ id: { ">": 5 } });
     assert.strictEqual(
       users.length,
       user_count - 5,
@@ -71,9 +67,7 @@ describe("Test the extended where() on resultsets by making sure that we", funct
   });
 
   it("get a the correct number of results from a greater than or equal to", async () => {
-    const user_rs = schema.rs("user");
-    user_rs.where({ id: { ">=": 5 } });
-    const users = await user_rs.all();
+    const users = await schema.rs("user").all({ id: { ">=": 5 } });
     assert.strictEqual(
       users.length,
       user_count - 4,
@@ -82,8 +76,7 @@ describe("Test the extended where() on resultsets by making sure that we", funct
   });
 
   it("get a the correct number of results from a not equal to", async () => {
-    const user_rs = schema.rs("user");
-    user_rs.where({ id: { "!=": 5 } });
+    const user_rs = schema.rs("user").where({ id: { "!=": 5 } });
     const users = await user_rs.all();
     assert.strictEqual(
       users.length,
@@ -93,16 +86,14 @@ describe("Test the extended where() on resultsets by making sure that we", funct
   });
 
   it("get a the correct number of results from an in", async () => {
-    const user_rs = schema.rs("user");
-    user_rs.where({ id: { in: [4, 5, 3] } });
+    const user_rs = schema.rs("user").where({ id: { in: [4, 5, 3] } });
     const users = await user_rs.all();
     assert.strictEqual(users.length, 3, "Got three results");
   });
 
   it("get an exception when pass a non-array to in", async () => {
     try {
-      const user_rs = schema.rs("user");
-      user_rs.where({ id: { in: 3 } });
+      const user_rs = schema.rs("user").where({ id: { in: 3 } });
       await user_rs.all();
       throw new Error("We did not get an exception from a non-array in value");
     } catch (err) {
@@ -111,8 +102,7 @@ describe("Test the extended where() on resultsets by making sure that we", funct
   });
 
   it("get a the correct number of results from a not in", async () => {
-    const user_rs = schema.rs("user");
-    user_rs.where({ id: { "not in": [5, 3] } });
+    const user_rs = schema.rs("user").where({ id: { "not in": [5, 3] } });
     const users = await user_rs.all();
     assert.strictEqual(
       users.length,
@@ -123,8 +113,7 @@ describe("Test the extended where() on resultsets by making sure that we", funct
 
   it("get an exception when pass a non-array to not in", async () => {
     try {
-      const user_rs = schema.rs("user");
-      user_rs.where({ id: { "not in": 5 } });
+      const user_rs = schema.rs("user").where({ id: { "not in": 5 } });
       await user_rs.all();
       throw new Error(
         "We did not get an exception from a non-array not in value"

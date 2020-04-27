@@ -54,6 +54,13 @@ const user =
 ```
 
 ```javascript
+// first() itself can take params
+const user =
+  await jaorm.rs('users')
+  .first({ username: 'bob' });
+```
+
+```javascript
 // Running a query where you expect exactly one result
 const user =
   await jaorm.rs('users')
