@@ -7,6 +7,10 @@
     "name": "Andrew Nelson",
     "email": "andrew.nelson@iinteractive.com"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iinteractive/jaorm.git"
+  },
   "license": "MIT",
   "dependencies": {
     "knex": "^0.19.4",
@@ -42,7 +46,7 @@
     "npm": ">= 6.11.3"
   },
   "scripts": {
-    "tests": "node run_tests.js"
+    "test": "node run_tests.js"
   },
   "husky": {
     "hooks": {
