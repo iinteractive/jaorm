@@ -1,11 +1,15 @@
 {
   "name": "jaorm",
   "description": "Just Another ORM",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "main": "lib/schema.js",
   "author": {
     "name": "Andrew Nelson",
     "email": "andrew.nelson@iinteractive.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iinteractive/jaorm.git"
   },
   "license": "MIT",
   "dependencies": {
@@ -19,30 +23,35 @@
     "eslint": "5.6.0",
     "eslint-config-airbnb": "17.1.0",
     "eslint-config-prettier": "3.1.0",
-    "eslint-plugin-import": "2.14.0",
+    "eslint-plugin-import": "^2.24.2",
     "eslint-plugin-jsx-a11y": "6.1.1",
     "eslint-plugin-prettier": "2.6.2",
     "eslint-plugin-react": "7.11.1",
-    "husky": "1.3.1",
-    "lint-staged": "8.1.5",
-    "mocha": "7.1.1",
-    "mssql": "^6.2.0",
+    "husky": "^7.0.2",
+    "lint-staged": "^11.1.2",
+    "mocha": "^9.1.1",
+    "mssql": "^7.2.1",
     "mysql": "^2.17.1",
     "mysql2": "^2.1.0",
+    "npm-force-resolutions": "0.0.10",
     "pg": "7.12.1",
-    "prettier": "1.16.4",
-    "sqlite3": "4.1.0"
+    "prettier": "^2.3.2",
+    "sqlite3": "^5.0.2"
+  },
+  "resolutions": {
+    "node-gyp": "^8"
   },
   "engines": {
     "node": ">= 12.11.1",
     "npm": ">= 6.11.3"
   },
   "scripts": {
-    "tests": "node run_tests.js"
+    "test": "node run_tests.js"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "lint-staged",
+      "preinstall": "npx npm-force-resolutions"
     }
   },
   "lint-staged": {
