@@ -5,6 +5,7 @@
 
 // eslint-disable-next-line import/no-extraneous-dependencies
 const Mocha = require("mocha");
+const { lookupFiles } = require("mocha/lib/cli");
 // eslint-disable-next-line import/no-extraneous-dependencies
 const chai = require("chai");
 // eslint-disable-next-line import/no-extraneous-dependencies
@@ -13,6 +14,7 @@ const fs = require("fs");
 const knex = require("knex");
 // eslint-disable-next-line import/no-extraneous-dependencies
 const sqlite3 = require("sqlite3");
+const path = require("path");
 
 const test_fixture_data = JSON.parse(
   fs.readFileSync("test/fixtures/table_data.json")
@@ -124,7 +126,7 @@ async function run_tests(options) {
       "test/drivers"
     ];
     for (const ts of test_sections) {
-      let section_files = Mocha.utils.lookupFiles(ts, ["js"], true);
+      let section_files = lookupFiles(ts, ["js"], true).map(file => path.resolve(file));
       Array.prototype.push.apply(files, section_files);
     }
 
